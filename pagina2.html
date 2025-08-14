@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destinos de Viaje</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #359aff;
+            --light-color: #ecf0f1;
+            --dark-color: #379bff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f9;
+        }
+
+        /* Encabezado con video de fondo */
+        .header-section {
+            position: relative;
+            overflow: hidden;
+            padding: 12rem 0;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+        }
+        
+        #video-fondo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1;
+            transform: translateX(-50%) translateY(-50%);
+            object-fit: cover; /* Esta propiedad hace que el video cubra todo el espacio */
+        }
+
+
+        /* Barra de Navegación */
+        .navbar {
+            background-color: var(--dark-color) !important;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .navbar-brand {
+            color: var(--light-color) !important;
+            font-weight: 500;
+            transition: color 0.3s ease-in-out;
+        }
+        .navbar-brand:hover {
+            color: var(--primary-color) !important;
+        }
+        .nav-link {
+            display: inline-block;
+            padding: 0.75rem 1.25rem;
+            margin: 0 0.5rem;
+            border-radius: 0.5rem;
+            background-color: rgba(255, 255, 255, 0.15);
+            color: var(--light-color) !important;
+            text-decoration: none;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .nav-link:hover, .nav-link:focus {
+            background-color: var(--primary-color);
+            color: var(--light-color) !important;
+        }
+        .navbar-nav .nav-link.active {
+            background-color: var(--secondary-color);
+            color: var(--light-color) !important;
+        }
+        .navbar-toggler {
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28236, 240, 241, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+
+        /* Secciones Generales */
+        h2 {
+            color: var(--dark-color);
+            font-weight: 600;
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        /* Tarjetas (Cards) */
+        .card {
+            border: none;
+            border-radius: 1rem;
+            box-shadow: 0 8px 16px rgba(8, 164, 255, 0.685);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            overflow: hidden;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(6, 110, 207, 0.788);
+        }
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+        .card-body {
+            padding: 1.5rem;
+        }
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            transition: background-color 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+
+        /* Carrusel */
+        .carousel-item img {
+            height: 450px;
+            object-fit: cover;
+            border-radius: 1rem;
+        }
+        .carousel {
+            box-shadow: 0 10px 20px rgba(16, 187, 255, 0.822);
+            border-radius: 1rem;
+        }
+
+        /* Formulario de Contacto */
+        #contacto .card {
+            background-color: white;
+            padding: 2rem;
+        }
+        .form-label {
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.25);
+        }
+    </style>
+</head>
+<body>
+
+        <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="bi bi-airplane-fill me-2"></i>Magic Explore</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#destinos">Destinos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#galeria">Galería</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contacto">Contacto</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#nosotros">nosotros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#itinerarios">itinerarios</a>
+                    </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="#Testimonios">Testimonios</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="header-section text-center">
+        <video autoplay muted loop id="video-fondo" poster="imagen-de-previsualizacion.jpg">
+            <source src="video08.mp4" type="video/mp4">
+        </video>
+        
+        <div class="container">
+            <h1 class="display-4 fw-bold">Descubre el Mundo con Nosotros</h1>
+            <p class="lead">Explora destinos increíbles y crea recuerdos inolvidables.</p>
+        </div>
+    </header>
+
+
+    <section id="destinos" class="container my-5">
+        <div class="text-center">
+            <h2>Destinos Mágicos</h2>
+        </div>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col">
+                <div class="card h-100">
+                    <img src="https://content.r9cdn.net/rimg/dimg/78/70/001b704a-city-15939-1629b33a69c.jpg?crop=true&width=1020&height=498" class="card-img-top" alt="Playa del Caribe">
+                    <div class="card-body">
+                        <h5 class="card-title">Playa del Caribe</h5>
+                        <p class="card-text">Descubre las aguas cristalinas y la arena blanca de este paraíso tropical. Un lugar perfecto para relajarse.</p>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#caribeModal">Ver más</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <img src="https://images.pexels.com/photos/2166553/pexels-photo-2166553.jpeg" class="card-img-top" alt="Montañas nevadas">
+                    <div class="card-body">
+                        <h5 class="card-title">Aventura en la Montaña</h5>
+                        <p class="card-text">Explora senderos y paisajes majestuosos. Ideal para los amantes del trekking y la naturaleza.</p>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#montanaModal">Ver más</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <img src="https://images.pexels.com/photos/1032650/pexels-photo-1032650.jpeg" class="card-img-top" alt="Ciudad Histórica">
+                    <div class="card-body">
+                        <h5 class="card-title">Tour por la Ciudad Histórica</h5>
+                        <p class="card-text">Sumérgete en la historia y la cultura de una ciudad milenaria. Monumentos, gastronomía y arte.</p>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ciudadModal">Ver más</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="modal fade" id="caribeModal" tabindex="-1" aria-labelledby="caribeModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="caribeModalLabel">Playa del Caribe</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <img class src="https://content.r9cdn.net/rimg/dimg/78/70/001b704a-city-15939-1629b33a69c.jpg?crop=true&width=1020&height=498">
+      <div class="modal-body">
+        <p>Vive una experiencia inolvidable en el corazón del Caribe. Descubre un paraíso de playas de arena blanca y aguas cristalinas, perfecto para relajarse y desconectar.</p>
+        <h6 class="mt-3">Actividades destacadas:</h6>
+        <ul>
+          <li>Snorkel y buceo en arrecifes de coral.</li>
+          <li>Visitas a cenotes y lagunas secretas.</li>
+          <li>Relajación en beach clubs exclusivos.</li>
+          <li>Paseos en catamarán al atardecer.</li>
+        </ul>
+        <p class="text-muted small mt-3">Duración del paquete: 7 días / 6 noches. Ideal para familias y parejas.</p>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="montanaModal" tabindex="-1" aria-labelledby="montanaModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="montanaModalLabel">Aventura en la Montaña</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <img src="https://images.pexels.com/photos/2166553/pexels-photo-2166553.jpeg">
+      <div class="modal-body">
+        <p>Embárcate en una aventura en las majestuosas montañas. Un destino ideal para quienes buscan adrenalina y una profunda conexión con la naturaleza y paisajes impresionantes.</p>
+        <h6 class="mt-3">Actividades destacadas:</h6>
+        <ul>
+          <li>Senderismo por senderos escénicos.</li>
+          <li>Escalada y rappel.</li>
+          <li>Rafting en ríos de montaña.</li>
+          <li>Acampada bajo las estrellas.</li>
+        </ul>
+
+        <p class="text-muted small mt-3">Duración del paquete: 5 días / 4 noches. Ideal para aventureros y grupos de amigos.</p>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="ciudadModal" tabindex="-1" aria-labelledby="ciudadModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ciudadModalLabel">Tour por la Ciudad Histórica</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <img src="https://www.xtrafondos.com/thumbs/1_12630.jpg">
+      <div class="modal-body">
+        <p>Viaja en el tiempo y sumérgete en la rica historia de una ciudad milenaria. Recorre calles empedradas, visita monumentos icónicos y descubre la vibrante vida cultural y gastronómica.</p>
+        <h6 class="mt-3">Actividades destacadas:</h6>
+        <ul>
+          <li>Visitas guiadas a sitios históricos.</li>
+          <li>Recorridos gastronómicos.</li>
+          <li>Paseos por barrios bohemios.</li>
+          <li>Noches de espectáculos culturales.</li>
+        </ul>
+        <p class="text-muted small mt-3">Duración del paquete: 4 días / 3 noches. Ideal para amantes de la historia y la cultura.</p>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
+
+    <section id="galeria" class="container my-5">
+        <div class="text-center">
+            <h2>Nuestra Galería de Fotos</h2>
+        </div>
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://www.xtrafondos.com/wallpapers/paisaje-de-lago-en-la-nieve-6880.jpg" class="d-block w-100" alt="Paisaje nevado">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://images.pexels.com/photos/3601425/pexels-photo-3601425.jpeg" class="d-block w-100" alt="Callejón de ciudad">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://images.pexels.com/photos/3472018/pexels-photo-3472018.jpeg" class="d-block w-100" alt="Desierto y rocas">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </section>
+
+    <section id="nosotros" class="container my-5">
+    <div class="text-center mb-5">
+        <h2>Quiénes Somos</h2>
+    </div>
+    <div class="row align-items-center">
+        <div class="col-md-6 mb-4 mb-md-0">
+            <img src="https://images.pexels.com/photos/386009/pexels-photo-386009.jpeg" class="img-fluid rounded-3 shadow-lg" alt="Equipo de Viajes Explorando">
+        </div>
+        <div class="col-md-6">
+            <p class="lead">En Magic Explore, somos un equipo de apasionados aventureros dedicados a crear experiencias de viaje inolvidables. Nuestra misión es mostrarte el mundo de una manera única y auténtica, conectándote con la cultura, la naturaleza y la gente de cada destino.</p>
+            <p class="lead">Con años de experiencia en la industria, nos enorgullece ofrecer itinerarios personalizados y un servicio al cliente excepcional para que tu única preocupación sea disfrutar de tu viaje.</p>
+        </div>
+    </div>
+</section>
+
+<section id="itinerarios" class="container my-5">
+    <div class="text-center">
+        <h2>Itinearios Destacados</h2>
+    </div>
+    <div id="itinerarioCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#itinerarioCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#itinerarioCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#itinerarioCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner rounded-3 shadow-lg">
+            <div class="carousel-item active">
+                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fs2.best-wallpaper.net%2Fwallpaper%2F2560x1440%2F2106%2FForest-stream-stones-trees-jungle-lake_2560x1440.jpg&f=1&nofb=1&ipt=88a93222c66214d198ed571591083ed19e6e16df0beee7470ef957acd515431f" class="d-block w-100" style="height: 400px; object-fit: cover;" alt="Aventura en la Selva">
+                <div class="carousel-caption d-none d-md-block">
+                    <div class="p-3" style="background-color: rgba(0, 0, 0, 0.6); border-radius: 0.5rem;">
+                        <h3>Itinerario 1: Aventura en la Selva</h3>
+                        <p>Explora la densa vegetación y la vida salvaje. Incluye senderismo, kayak y observación de aves.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.pexels.com%2Fphotos%2F15488513%2Fpexels-photo-15488513%2Ffree-photo-of-ciudad-amanecer-puesta-de-sol-punto-de-referencia.jpeg%3Fauto%3Dcompress%26cs%3Dtinysrgb%26w%3D1260%26h%3D750%26dpr%3D1&f=1&nofb=1&ipt=f12359f2c99adb7a961549666d209494903ef0c5c73932b23eda7e61ab7fc717" class="d-block w-100" style="height: 400px; object-fit: cover;" alt="Tour por Ciudades Históricas">
+                <div class="carousel-caption d-none d-md-block">
+                    <div class="p-3" style="background-color: rgba(0, 0, 0, 0.6); border-radius: 0.5rem;">
+                        <h3>Itinerario 2: Tour por Ciudades Históricas</h3>
+                        <p>Un recorrido por los monumentos más emblemáticos, museos y gastronomía local.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpapercave.com%2Fwp%2Fwp4088744.jpg&f=1&nofb=1&ipt=5d0f9393e2cb8e37226b04d1d08b7391ee383e6911ad049cc685139ca248c606" class="d-block w-100" style="height: 400px; object-fit: cover;" alt="Relajación en la Playa">
+                <div class="carousel-caption d-none d-md-block">
+                    <div class="p-3" style="background-color: rgba(0, 0, 0, 0.6); border-radius: 0.5rem;">
+                        <h3>Itinerario 3: Relajación en la Playa</h3>
+                        <p>Disfruta de sol, mar y arena. Incluye días de descanso, snorkel y cenas frente al mar.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#itinerarioCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#itinerarioCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</section>
+
+<section id="Testimonios" class="container my-5">
+    <div class="text-center mb-5">
+        <h2>Lo que Dicen Nuestros Viajeros</h2>
+    </div>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col">
+            <div class="card h-100 p-4 text-center">
+                <i class="bi bi-person-circle fs-1 text-primary mb-3"></i>
+                <p class="card-text fst-italic">"El viaje superó todas mis expectativas. La planificación fue impecable y los lugares visitados, mágicos. ¡Volveré a viajar con ustedes!"</p>
+                <p class="fw-bold">- Ana Torres</p>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100 p-4 text-center">
+                <i class="bi bi-person-circle fs-1 text-primary mb-3"></i>
+                <p class="card-text fst-italic">"Una experiencia inolvidable. La atención al detalle y la pasión por el viaje se notan en cada paso. ¡100% recomendados!"</p>
+                <p class="fw-bold">- Juan Pérez</p>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100 p-4 text-center">
+                <i class="bi bi-person-circle fs-1 text-primary mb-3"></i>
+                <p class="card-text fst-italic">"El mejor tour que he tomado en años. El guía era experto y el grupo muy divertido. No puedo esperar a mi próxima aventura."</p>
+                <p class="fw-bold">- Lucía Gómez</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="contacto" class="container my-5">
+        <div class="text-center">
+            <h2>Contáctanos</h2>
+        </div>
+        <div class="card p-4 mx-auto" style="max-width: 600px;">
+            <form id="contact-form">
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Correo Electrónico</label>
+                    <input type="email" class="form-control" id="email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="mensaje" class="form-label">Mensaje</label>
+                    <textarea class="form-control" id="mensaje" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Enviar Mensaje</button>
+            </form>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
